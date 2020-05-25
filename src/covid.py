@@ -10,11 +10,25 @@ class Cidades():
     def estado(self):
 
         if self.response.status_code == 200:
-            print(self.response.status_code + 'O servidor está disponível')
+            print('{} O servidor está disponível'.format(self.response.status_code))
         else:
-            print(self.response.status_code + 'Servidor Indesponível')
+            print('{} Servidor Indesponível'.format(self.response.status_code))
 
-    dados = json.loads(response.content)
+    def data(self, state, uf, cases, deaths):
 
-    for dat in dados['data']:
-        print(dat['uid'])
+        dados = json.loads(self.response.content)
+
+        for dat in dados['data']:
+            print("\n")
+            print("Estado: {}".format(dat[state]))
+            print("UF: {}".format(dat[uf]))
+            print("Casos: {}".format(dat[cases]))
+            print("Mortes: {}".format(dat[deaths]))
+            print("\n")
+
+
+
+if __name__ == '__main__':
+    cidade = Cidades()
+    cidade.estado()
+    cidade.data('state','uf','cases','deaths')
